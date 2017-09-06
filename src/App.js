@@ -14,29 +14,32 @@ class App extends Component {
 
   handleAddItemToCart(item, itemQty) {
     const newItem = item;
-    const currentCartItemList = this.state.cartItems;
+    const currentItemList = this.state.cartItems;
     let itemExist = 0;
-    for (let i = 0; i < currentCartItemList.length && itemExist === 0; i++) {
-      if (currentCartItemList[i].code === newItem.code) {
-        currentCartItemList[i].quantity+=parseInt(itemQty);
-        currentCartItemList[i].totalPrice+=parseFloat(newItem.price*itemQty);
+
+    for (let i = 0; i < currentItemList.length && itemExist === 0; i++) {
+      if (currentItemList[i].code === newItem.code) {
+        // currentItemList[i] = {
+        //   ...currentItemList[i],
+        //   quantity: currentItemList[i].quantity + parseInt(itemQty, 10),
+        //   totalPrice: currentItemList[i].totalPrice + parseFloat(newItem.price*itemQty)
+        // };
+        currentItemList[i].quantity+=parseInt(itemQty);
+        currentItemList[i].totalPrice+=parseFloat(newItem.price*itemQty);
         this.setState({
-          cartItems: currentCartItemList
+          cartItems: currentItemList
         });
         itemExist = 1;
       }
     }
+    
     if (itemExist !== 1) {
-      newItem.quantity = parseInt(itemQty);
+      newItem.quantity = parseInt(itemQty, 10);
       newItem.totalPrice = item.price * itemQty;
       this.setState({
         cartItems: [...this.state.cartItems, newItem]
       });
     }
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    console.log(this.state.cartItems);
   }
 
   render() {

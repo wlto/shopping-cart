@@ -27,6 +27,7 @@ class Item extends Component {
         </td>
         <td>
           <button 
+            disabled={item.stock < this.state.itemQty || this.state.itemQty < 0}
             onClick={
               () => this.props.onAddToCart(this.props.item, this.props.itemIndex, this.state.itemQty)
             }>
