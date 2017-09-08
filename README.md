@@ -25,7 +25,7 @@ This shopping cart concept is my attempt to learn the ReactJS library. This is a
 
 - [ ] Refactor code for the add-to-cart functionality.
 - [ ] Add ability to remove an item from cart.
-- [ ] Implement the search functionality.
+- [x] Implement the search functionality.
 - [ ] Data validation for user's inputs.
 - [ ] Calculation and display for total price.
 - [ ] Styling with CSS.
