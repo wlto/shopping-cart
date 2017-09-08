@@ -7,7 +7,7 @@ class CartItem extends Component {
       <tr>
         <td>{item.name}</td>
         <td>{item.quantity}</td>
-        <td>{item.totalPrice.toFixed(2)}</td>
+        <td><span>$</span>{item.totalPrice.toFixed(2)}</td>
       </tr>
     )
   }

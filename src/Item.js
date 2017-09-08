@@ -15,21 +15,25 @@ class Item extends Component {
         <td>{item.name}</td>
         <td>{item.code}</td>
         <td>{item.stock}</td>
-        <td>{item.price.toFixed(2)}</td>
+        <td><span>$</span>{item.price.toFixed(2)}</td>
         <td>
           <input
             type="number"
             min="1"
             max={item.stock}
             defaultValue={this.state.itemQty}
+            value={this.state.itemQty}
             onChange={(e) => this.setState({ itemQty: parseInt(e.target.value, 10) })}
           />
         </td>
         <td>
           <button 
-            disabled={item.stock < this.state.itemQty || this.state.itemQty < 0}
+            disabled={item.stock < this.state.itemQty || item.stock === 0 || this.state.itemQty < 0}
             onClick={
-              () => this.props.onAddToCart(this.props.item, this.props.itemIndex, this.state.itemQty)
+              () => {
+                this.setState({ itemQty: 1 });
+                this.props.onAddToCart(this.props.item, this.props.itemIndex, this.state.itemQty);
+              }
             }>
             Add to Cart
           </button>
