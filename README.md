@@ -1,9 +1,9 @@
 # React Shopping Cart
-A minimal concept shopping cart built with ReactJS
+A minimal shopping cart concept built with ReactJS
 
 #### Why?
 
-This is an attempt of mine to learn the ReactJS library. This small project is also an example of how data flows in React. Please check out the code for more information.
+This shopping cart concept is my attempt to learn the ReactJS library. This is also an example of how data flows in React. Please check out the code for more information.
 
 #### Technology
 
