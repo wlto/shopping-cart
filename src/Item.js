@@ -7,7 +7,7 @@ class Item extends Component {
       itemQty: 1
     }
   }
-
+  
   render() {
     const item = this.props.item;
     return (
@@ -31,9 +31,10 @@ class Item extends Component {
             onClick={
               () => {
                 this.setState({ itemQty: 1 });
-                this.props.onAddToCart(this.props.item, this.props.itemIndex, this.state.itemQty);
+                this.props.onAddToCart(item, this.props.itemIndex, this.state.itemQty);
               }
-            }>
+            }
+          >
             Add to Cart
           </button>
         </td>

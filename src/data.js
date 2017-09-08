@@ -3,7 +3,7 @@ const data = [
     name: 'Orange Juice',
     code: 'OJ112',
     stock: 50,
-    price: 7.99
+    price: 4.99
   },
   {
     name: 'Potato Chips',
@@ -28,6 +28,24 @@ const data = [
     code: 'IS332',
     stock: 19,
     price: 7.99
+  },
+  {
+    name: 'Almond Milk',
+    code: 'AM808',
+    stock: 20,
+    price: 3.99
+  },
+  {
+    name: 'Philly Sushi',
+    code: 'PS111',
+    stock: 10,
+    price: 2.99
+  },
+  {
+    name: 'Apple Juice',
+    code: 'AJ696',
+    stock: 4,
+    price: 1.99
   }
 ];
 

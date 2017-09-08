@@ -9,8 +9,10 @@ class App extends Component {
     super(props);
     this.state = {
       inventoryItems: props.data,
+      filteredItems: [],
+      searchText: '',
       cartItems: []
-    }
+    };
   }
   
   handleAddToCart(item, itemIndex, itemQty) {
@@ -51,12 +53,24 @@ class App extends Component {
     }
   }
 
+  handleSearchTextChange(text) {
+    const filteredList = this.state.inventoryItems.filter((item) => {
+      return item.name.toLowerCase().indexOf(text.toLowerCase().trim()) !== -1;
+    });
+    this.setState({
+      searchText: text,
+      filteredItems: filteredList
+    });
+  }
+
   render() {
     return (
       <div className="shopping-cart">
-        <Search />
+        <Search
+          searchText={this.state.searchText} 
+          onSearchTextChange={this.handleSearchTextChange.bind(this)}/>
         <Inventory 
-          data={this.state.inventoryItems} 
+          data={this.state.searchText.length > 0 ? this.state.filteredItems : this.state.inventoryItems} 
           onAddToCart={this.handleAddToCart.bind(this)} 
         />
         <Cart cartItems={this.state.cartItems} />
