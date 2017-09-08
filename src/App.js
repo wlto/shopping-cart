@@ -20,21 +20,18 @@ class App extends Component {
     this.setState({
       inventoryItems: newItemList
     });
-    this.updateCartItems(newItemList[itemIndex], itemQty);
+    this.handleUpdateCartItems(newItemList[itemIndex], itemQty);
   }
 
-  updateCartItems(item, itemQty) {
+  handleUpdateCartItems(item, itemQty) {
     const newItem = item;
     const currentItemList = this.state.cartItems;
     let itemExist = 0;
 
+    // Check if item already exists
     for (let i = 0; i < currentItemList.length && itemExist === 0; i++) {
+      // If item exists, accumulate the quantity and the price accordingly
       if (currentItemList[i].code === newItem.code) {
-        // currentItemList[i] = {
-        //   ...currentItemList[i],
-        //   quantity: currentItemList[i].quantity + parseInt(itemQty, 10),
-        //   totalPrice: currentItemList[i].totalPrice + parseFloat(newItem.price*itemQty)
-        // };
         currentItemList[i].quantity+=itemQty;
         currentItemList[i].totalPrice+=parseFloat(newItem.price*itemQty);
         this.setState({
@@ -44,8 +41,9 @@ class App extends Component {
       }
     }
     
+    // If item does not exist, add it to the cart
     if (itemExist !== 1) {
-      newItem.quantity = parseInt(itemQty, 10);
+      newItem.quantity = itemQty;
       newItem.totalPrice = item.price * itemQty;
       this.setState({
         cartItems: [...this.state.cartItems, newItem]
@@ -60,7 +58,6 @@ class App extends Component {
         <Inventory 
           data={this.state.inventoryItems} 
           onAddToCart={this.handleAddToCart.bind(this)} 
-          onAddItemToCart={this.updateCartItems.bind(this)} 
         />
         <Cart cartItems={this.state.cartItems} />
       </div>

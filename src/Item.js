@@ -27,7 +27,7 @@ class Item extends Component {
         </td>
         <td>
           <button 
-            disabled={item.stock < this.state.itemQty || item.stock === 0 || this.state.itemQty < 0}
+            disabled={item.stock < this.state.itemQty || item.stock === 0 || this.state.itemQty <= 0}
             onClick={
               () => {
                 this.setState({ itemQty: 1 });
