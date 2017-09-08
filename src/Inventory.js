@@ -10,24 +10,14 @@ class Inventory extends Component {
     }
   }
 
-  handleAddToCart(item, itemIndex, itemQty) {
-    const newStock = item.stock - itemQty;
-    const newItemList = this.state.items;
-    newItemList[itemIndex].stock = newStock;
-    this.setState({
-      items: newItemList
-    });
-    this.props.onAddItemToCart(newItemList[itemIndex], itemQty);
-  }
-
   render() {
-    const inventoryItems = this.state.items.map((item, i) => {
+    const inventoryItems = this.props.data.map((item, i) => {
       return (
         <Item 
           key={item.code} 
           itemIndex={i} 
           item={item} 
-          onAddToCart={this.handleAddToCart.bind(this)}
+          onAddToCart={this.props.onAddToCart}
         />
       )  
     });

@@ -23,11 +23,12 @@ This is an attempt of mine to learn beginner/intermediate level JavaScript as we
 
 #### To-dos
 
+- [ ] Refactor code for the add-to-cart functionality.
+- [ ] Add ability to remove an item from cart.
 - [ ] Implement the search functionality.
 - [ ] Data validation for user's inputs.
 - [ ] Calculation and display for total price.
 - [ ] Styling with CSS.
-- [ ] Add ability to remove an item from cart.
 - [ ] Implement the check-out functionality.
 - [ ] Implement fuzzy finding.
 - [ ] Implement a better searching algorithm (currently not decided).

@@ -8,11 +8,22 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      inventoryItems: props.data,
       cartItems: []
     }
   }
+  
+  handleAddToCart(item, itemIndex, itemQty) {
+    const newStock = item.stock - itemQty;
+    const newItemList = this.state.inventoryItems;
+    newItemList[itemIndex].stock = newStock;
+    this.setState({
+      inventoryItems: newItemList
+    });
+    this.updateCartItems(newItemList[itemIndex], itemQty);
+  }
 
-  handleAddItemToCart(item, itemQty) {
+  updateCartItems(item, itemQty) {
     const newItem = item;
     const currentItemList = this.state.cartItems;
     let itemExist = 0;
@@ -46,7 +57,11 @@ class App extends Component {
     return (
       <div className="shopping-cart">
         <Search />
-        <Inventory data={this.props.data} onAddItemToCart={this.handleAddItemToCart.bind(this)} />
+        <Inventory 
+          data={this.state.inventoryItems} 
+          onAddToCart={this.handleAddToCart.bind(this)} 
+          onAddItemToCart={this.updateCartItems.bind(this)} 
+        />
         <Cart cartItems={this.state.cartItems} />
       </div>
     )

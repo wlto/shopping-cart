@@ -21,7 +21,6 @@ class Item extends Component {
             type="number"
             min="1"
             max={item.stock}
-            defaultValue={this.state.itemQty}
             value={this.state.itemQty}
             onChange={(e) => this.setState({ itemQty: parseInt(e.target.value, 10) })}
           />
