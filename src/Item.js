@@ -22,7 +22,7 @@ class Item extends Component {
             min="1"
             max={item.stock}
             defaultValue={this.state.itemQty}
-            onChange={(e) => this.setState({ itemQty: e.target.value })}
+            onChange={(e) => this.setState({ itemQty: parseInt(e.target.value, 10) })}
           />
         </td>
         <td>

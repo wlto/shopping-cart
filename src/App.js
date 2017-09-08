@@ -24,7 +24,7 @@ class App extends Component {
         //   quantity: currentItemList[i].quantity + parseInt(itemQty, 10),
         //   totalPrice: currentItemList[i].totalPrice + parseFloat(newItem.price*itemQty)
         // };
-        currentItemList[i].quantity+=parseInt(itemQty);
+        currentItemList[i].quantity+=itemQty;
         currentItemList[i].totalPrice+=parseFloat(newItem.price*itemQty);
         this.setState({
           cartItems: currentItemList
