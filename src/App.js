@@ -63,6 +63,25 @@ class App extends Component {
     });
   }
 
+  handleRemoveFromCart(item) {
+    let currentCartItems = this.state.cartItems;
+    let removedItemIndex = -1;
+
+    for (let i = 0; i < currentCartItems.length && removedItemIndex === -1; i++) {
+      if (currentCartItems[i].code === item.code) {
+        currentCartItems[i].stock += item.quantity;
+        removedItemIndex = i;
+      }
+    }
+
+    if (removedItemIndex !== -1) {
+      currentCartItems.splice(removedItemIndex, 1);
+    }
+    this.setState({
+      cartItems: currentCartItems
+    });
+  }
+  
   render() {
     return (
       <div className="shopping-cart">
@@ -73,7 +92,7 @@ class App extends Component {
           data={this.state.searchText.length > 0 ? this.state.filteredItems : this.state.inventoryItems} 
           onAddToCart={this.handleAddToCart.bind(this)} 
         />
-        <Cart cartItems={this.state.cartItems} />
+        <Cart cartItems={this.state.cartItems} onRemoveFromCart={this.handleRemoveFromCart.bind(this)} />
       </div>
     )
   }

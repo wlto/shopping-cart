@@ -5,7 +5,7 @@ import CartItem from './CartItem';
 class Cart extends Component {
   render() {
     const cartItems = this.props.cartItems.map((item, i) => 
-      <CartItem key={item.code} item={item} />
+      <CartItem key={item.code} item={item} onRemoveFromCart={this.props.onRemoveFromCart} />
     );
     return (
       <div className="cart">
@@ -16,6 +16,7 @@ class Cart extends Component {
               <td>Name</td>
               <td>Quantity</td>
               <td>Price</td>
+              <td>Action</td>
             </tr>
           </thead>
           <tbody>
