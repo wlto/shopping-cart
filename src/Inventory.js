@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import Item from './Item.js';
+import InventoryItem from './InventoryItem.js';
 
 class Inventory extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class Inventory extends Component {
   render() {
     const inventoryItems = this.props.data.map((item, i) => {
       return (
-        <Item 
+        <InventoryItem
           key={item.code} 
           itemIndex={i} 
           item={item} 
