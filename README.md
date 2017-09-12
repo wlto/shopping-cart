@@ -23,15 +23,17 @@ This shopping cart concept is my attempt to learn the ReactJS library. This is a
 
 #### To-dos
 
-- [ ] Refactor code for the add-to-cart functionality.
+- [x] Refactor code for the add-to-cart functionality.
 - [x] Add ability to remove an item from cart.
 - [x] Implement the search functionality.
-- [ ] Data validation for user's inputs.
-- [ ] Calculation and display for total price.
+- [x] Data validation for user's inputs.
+- [ ] Calculation and displaying for total price.
 - [ ] Styling with CSS.
 - [ ] Implement the check-out functionality.
-- [ ] Implement fuzzy finding.
-- [ ] Implement a better searching algorithm (currently not decided).
+
+#### Observations
+
+- We must be more careful when passing objects to a function. Since in JavaScript passing an object (or an array) to a function will pass the actual object (or array) itself. Hence, modifying that object inside the function results in mutating the object itself.
 
 #### License
 

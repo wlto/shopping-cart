@@ -9,9 +9,7 @@ class CartItem extends Component {
         <td>{item.quantity}</td>
         <td><span>$</span>{item.totalPrice.toFixed(2)}</td>
         <td>
-          <button
-            onClick={() => this.props.onRemoveFromCart(item)}
-          >
+          <button onClick={() => this.props.onRemoveFromCart(item)}>
             Remove
           </button>
         </td>

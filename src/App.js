@@ -16,7 +16,7 @@ class App extends Component {
   }
   
   handleSearchTextChange(text) {
-    // Returns items each of which has a name that matches the search text
+    // Returns items that have names matching the search text
     const filteredList = this.state.inventoryItems.filter((item) => {
       return item.name.toLowerCase().indexOf(text.toLowerCase().trim()) !== -1;
     });
@@ -33,7 +33,13 @@ class App extends Component {
     this.setState({
       inventoryItems: newItemList
     });
-    this.handleUpdateCartItems(itemIndex, newItemList[itemIndex].code, newItemList[itemIndex].name, newItemList[itemIndex].price, itemQty);
+    this.handleUpdateCartItems(
+      itemIndex, 
+      newItemList[itemIndex].code, 
+      newItemList[itemIndex].name, 
+      newItemList[itemIndex].price, 
+      itemQty
+    );
   }
 
   handleUpdateCartItems(itemIndexInInventory, itemCode, itemName, itemPrice, itemQty) {
@@ -45,8 +51,8 @@ class App extends Component {
     for (let i = 0; i < currentItemList.length && itemExist === 0; i++) {
       // If item exists, update the quantity and price
       if (currentItemList[i].code === itemCode) {
-        currentItemList[i].quantity+=itemQty;
-        currentItemList[i].totalPrice+=parseFloat(itemPrice * itemQty);
+        currentItemList[i].quantity += itemQty;
+        currentItemList[i].totalPrice += parseFloat(itemPrice * itemQty);
         this.setState({
           cartItems: currentItemList
         });
@@ -73,6 +79,7 @@ class App extends Component {
 
     for (let i = 0; i < currentCartItems.length; i++) {
       if (currentCartItems[i].code === item.code) {
+        // Restore stock level in inventory
         currentInventoryItem[currentCartItems[i].indexInInventory].stock += currentCartItems[i].quantity;
         currentCartItems.splice(i, 1);
       }
@@ -88,12 +95,17 @@ class App extends Component {
       <div className="shopping-cart">
         <Search
           searchText={this.state.searchText} 
-          onSearchTextChange={this.handleSearchTextChange.bind(this)}/>
+          onSearchTextChange={this.handleSearchTextChange.bind(this)} />
         <Inventory 
-          data={this.state.searchText.length > 0 ? this.state.filteredItems : this.state.inventoryItems} 
-          onAddToCart={this.handleAddToCart.bind(this)} 
-        />
-        <Cart cartItems={this.state.cartItems} onRemoveFromCart={this.handleRemoveFromCart.bind(this)} />
+          data={
+            this.state.searchText.length > 0 
+            ? this.state.filteredItems 
+            : this.state.inventoryItems
+          } 
+          onAddToCart={this.handleAddToCart.bind(this)} />
+        <Cart 
+          cartItems={this.state.cartItems} 
+          onRemoveFromCart={this.handleRemoveFromCart.bind(this)} />
       </div>
     )
   }
