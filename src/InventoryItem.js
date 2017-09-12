@@ -19,7 +19,7 @@ class InventoryItem extends Component {
         <td>
           <input
             type="number"
-            min="1"
+            min={1}
             max={item.stock}
             value={this.state.itemQty}
             onChange={(e) => this.setState({ itemQty: parseInt(e.target.value, 10) })}
@@ -31,7 +31,7 @@ class InventoryItem extends Component {
             onClick={
               () => {
                 this.setState({ itemQty: 1 });
-                this.props.onAddToCart(item, this.props.itemIndex, this.state.itemQty);
+                this.props.onAddToCart(item.stock, this.props.itemIndex, this.state.itemQty);
               }
             }
           >

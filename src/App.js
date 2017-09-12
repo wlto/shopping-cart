@@ -15,45 +15,8 @@ class App extends Component {
     };
   }
   
-  handleAddToCart(item, itemIndex, itemQty) {
-    const newStock = item.stock - itemQty;
-    const newItemList = this.state.inventoryItems;
-    newItemList[itemIndex].stock = newStock;
-    this.setState({
-      inventoryItems: newItemList
-    });
-    this.handleUpdateCartItems(newItemList[itemIndex], itemQty);
-  }
-
-  handleUpdateCartItems(item, itemQty) {
-    const newItem = item;
-    const currentItemList = this.state.cartItems;
-    let itemExist = 0;
-
-    // Check if item already exists
-    for (let i = 0; i < currentItemList.length && itemExist === 0; i++) {
-      // If item exists, accumulate the quantity and the price accordingly
-      if (currentItemList[i].code === newItem.code) {
-        currentItemList[i].quantity+=itemQty;
-        currentItemList[i].totalPrice+=parseFloat(newItem.price*itemQty);
-        this.setState({
-          cartItems: currentItemList
-        });
-        itemExist = 1;
-      }
-    }
-    
-    // If item does not exist, add it to the cart
-    if (itemExist !== 1) {
-      newItem.quantity = itemQty;
-      newItem.totalPrice = item.price * itemQty;
-      this.setState({
-        cartItems: [...this.state.cartItems, newItem]
-      });
-    }
-  }
-
   handleSearchTextChange(text) {
+    // Returns items each of which has a name that matches the search text
     const filteredList = this.state.inventoryItems.filter((item) => {
       return item.name.toLowerCase().indexOf(text.toLowerCase().trim()) !== -1;
     });
@@ -62,21 +25,59 @@ class App extends Component {
       filteredItems: filteredList
     });
   }
+  
+  handleAddToCart(itemStock, itemIndex, itemQty) {
+    const newStock = itemStock - itemQty;
+    const newItemList = this.state.inventoryItems;
+    newItemList[itemIndex].stock = newStock;
+    this.setState({
+      inventoryItems: newItemList
+    });
+    this.handleUpdateCartItems(itemIndex, newItemList[itemIndex].code, newItemList[itemIndex].name, newItemList[itemIndex].price, itemQty);
+  }
 
-  handleRemoveFromCart(item) {
-    let currentCartItems = this.state.cartItems;
-    let removedItemIndex = -1;
+  handleUpdateCartItems(itemIndexInInventory, itemCode, itemName, itemPrice, itemQty) {
+    const currentItemList = this.state.cartItems;
+    let itemExist = 0;
+    let newItem = {};
 
-    for (let i = 0; i < currentCartItems.length && removedItemIndex === -1; i++) {
-      if (currentCartItems[i].code === item.code) {
-        currentCartItems[i].stock += item.quantity;
-        removedItemIndex = i;
+    // Check if item already exists
+    for (let i = 0; i < currentItemList.length && itemExist === 0; i++) {
+      // If item exists, update the quantity and price
+      if (currentItemList[i].code === itemCode) {
+        currentItemList[i].quantity+=itemQty;
+        currentItemList[i].totalPrice+=parseFloat(itemPrice * itemQty);
+        this.setState({
+          cartItems: currentItemList
+        });
+        itemExist = 1;
       }
     }
-
-    if (removedItemIndex !== -1) {
-      currentCartItems.splice(removedItemIndex, 1);
+    
+    // If item does not exist, add it to the cart as a new item
+    if (itemExist !== 1) {
+      newItem.indexInInventory = itemIndexInInventory;
+      newItem.code = itemCode;
+      newItem.name = itemName;
+      newItem.quantity = itemQty;
+      newItem.totalPrice = parseFloat(itemPrice * itemQty);
+      this.setState({
+        cartItems: [...this.state.cartItems, newItem]
+      });
     }
+  }
+
+  handleRemoveFromCart(item) {
+    let currentInventoryItem = this.state.inventoryItems;
+    let currentCartItems = this.state.cartItems;
+
+    for (let i = 0; i < currentCartItems.length; i++) {
+      if (currentCartItems[i].code === item.code) {
+        currentInventoryItem[currentCartItems[i].indexInInventory].stock += currentCartItems[i].quantity;
+        currentCartItems.splice(i, 1);
+      }
+    }
+    
     this.setState({
       cartItems: currentCartItems
     });

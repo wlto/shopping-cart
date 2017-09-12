@@ -3,13 +3,6 @@ import React, {Component} from 'react';
 import InventoryItem from './InventoryItem.js';
 
 class Inventory extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      items: props.data
-    }
-  }
-
   render() {
     const inventoryItems = this.props.data.map((item, i) => {
       return (

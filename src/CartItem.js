@@ -10,7 +10,7 @@ class CartItem extends Component {
         <td><span>$</span>{item.totalPrice.toFixed(2)}</td>
         <td>
           <button
-            onClick={() => {this.props.onRemoveFromCart(item)}}
+            onClick={() => this.props.onRemoveFromCart(item)}
           >
             Remove
           </button>
