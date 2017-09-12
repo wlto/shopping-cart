@@ -21,13 +21,16 @@ This shopping cart concept is my attempt to learn the ReactJS library. This is a
 4. Type `npm install` to install the required dependencies.
 5. Type `npm start` to run. The app will show up under a local development server.
 
+> *Disclaimer: This application is just a concept. It is by no mean production-ready.*
+
 #### To-dos
 
 - [x] Refactor code for the add-to-cart functionality.
 - [x] Add ability to remove an item from cart.
 - [x] Implement the search functionality.
 - [x] Data validation for user's inputs.
-- [ ] Calculation and displaying for total price.
+- [x] Calculation and displaying for total price.
+- [ ] Refactor code.
 - [ ] Styling with CSS.
 - [ ] Implement the check-out functionality.
 

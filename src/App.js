@@ -11,7 +11,8 @@ class App extends Component {
       inventoryItems: props.data,
       filteredItems: [],
       searchText: '',
-      cartItems: []
+      cartItems: [],
+      totalPrice: 0
     };
   }
   
@@ -46,6 +47,7 @@ class App extends Component {
     const currentItemList = this.state.cartItems;
     let itemExist = 0;
     let newItem = {};
+    let currentTotal = this.state.totalPrice;
 
     // Check if item already exists
     for (let i = 0; i < currentItemList.length && itemExist === 0; i++) {
@@ -53,8 +55,10 @@ class App extends Component {
       if (currentItemList[i].code === itemCode) {
         currentItemList[i].quantity += itemQty;
         currentItemList[i].totalPrice += parseFloat(itemPrice * itemQty);
+        currentTotal += parseFloat(itemPrice * itemQty);
         this.setState({
-          cartItems: currentItemList
+          cartItems: currentItemList,
+          totalPrice: currentTotal
         });
         itemExist = 1;
       }
@@ -67,8 +71,10 @@ class App extends Component {
       newItem.name = itemName;
       newItem.quantity = itemQty;
       newItem.totalPrice = parseFloat(itemPrice * itemQty);
+      currentTotal = this.state.totalPrice + newItem.totalPrice;
       this.setState({
-        cartItems: [...this.state.cartItems, newItem]
+        cartItems: [...this.state.cartItems, newItem],
+        totalPrice: currentTotal
       });
     }
   }
@@ -76,17 +82,20 @@ class App extends Component {
   handleRemoveFromCart(item) {
     let currentInventoryItem = this.state.inventoryItems;
     let currentCartItems = this.state.cartItems;
+    let currentTotal = this.state.totalPrice;
 
     for (let i = 0; i < currentCartItems.length; i++) {
       if (currentCartItems[i].code === item.code) {
         // Restore stock level in inventory
         currentInventoryItem[currentCartItems[i].indexInInventory].stock += currentCartItems[i].quantity;
+        currentTotal -= currentCartItems[i].totalPrice;
         currentCartItems.splice(i, 1);
       }
     }
     
     this.setState({
-      cartItems: currentCartItems
+      cartItems: currentCartItems,
+      totalPrice: currentTotal
     });
   }
   
@@ -105,7 +114,8 @@ class App extends Component {
           onAddToCart={this.handleAddToCart.bind(this)} />
         <Cart 
           cartItems={this.state.cartItems} 
-          onRemoveFromCart={this.handleRemoveFromCart.bind(this)} />
+          onRemoveFromCart={this.handleRemoveFromCart.bind(this)}
+          totalPrice={this.state.totalPrice} />
       </div>
     )
   }

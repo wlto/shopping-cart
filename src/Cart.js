@@ -4,7 +4,7 @@ import CartItem from './CartItem';
 
 class Cart extends Component {
   render() {
-    const cartItems = this.props.cartItems.map((item, i) => 
+    const cartItems = this.props.cartItems.map((item, i) =>
       <CartItem key={item.code} item={item} onRemoveFromCart={this.props.onRemoveFromCart} />
     );
     return (
@@ -23,6 +23,7 @@ class Cart extends Component {
             {cartItems}
           </tbody>
         </table>
+        <h2>Total: <span>${this.props.totalPrice.toFixed(2)}</span></h2>
       </div>
     )
   }
