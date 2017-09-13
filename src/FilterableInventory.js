@@ -48,7 +48,7 @@ class FilterableInventory extends Component {
           onSearchTextChange={this.handleSearchTextChange.bind(this)} 
         />
         <Inventory 
-          data={
+          items={
             this.state.searchText.length > 0 
             ? this.state.filteredItems 
             : this.props.inventoryItems

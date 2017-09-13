@@ -4,7 +4,7 @@ import InventoryItem from './InventoryItem.js';
 
 class Inventory extends Component {
   render() {
-    const inventoryItems = this.props.data.map((item, i) => {
+    const inventoryItems = this.props.items.map((item, i) => {
       return (
         <InventoryItem
           key={item.code} 

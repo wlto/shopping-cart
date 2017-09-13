@@ -14,7 +14,7 @@ const data = [
   {
     name: 'Authentic Milk',
     code: 'AM410',
-    stock: 12,
+    stock: 15,
     price: 9.99
   },
   {
@@ -26,7 +26,7 @@ const data = [
   {
     name: 'Ichiban Sushi',
     code: 'IS332',
-    stock: 19,
+    stock: 20,
     price: 7.99
   },
   {
@@ -44,7 +44,7 @@ const data = [
   {
     name: 'Apple Juice',
     code: 'AJ696',
-    stock: 4,
+    stock: 5,
     price: 1.99
   }
 ];

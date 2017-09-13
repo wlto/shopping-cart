@@ -15,38 +15,38 @@ class App extends Component {
 
   handleUpdateInventoryItem(itemIndex, itemStock, itemQty, removeFromCart) {
     const itemList = this.state.inventoryItems.slice(0);
-    const currentItemStock = itemList[itemIndex].stock;
-    const newStock = removeFromCart ? currentItemStock + itemQty : currentItemStock - itemQty;
+    const currentInventoryStock = itemList[itemIndex].stock;
+    const newStock = removeFromCart ? currentInventoryStock + itemQty : currentInventoryStock - itemQty;
     itemList[itemIndex].stock = newStock;
 
     this.setState({ inventoryItems: itemList });
   }
 
   handleUpdateCartItems(itemIndexInInventory, itemCode, itemName, itemPrice, itemQty) {
-    const currentItemList = this.state.cartItems.slice(0);
-    let itemExist = 0;
+    const currentCartItems = this.state.cartItems.slice(0);
+    let itemExist = false;
     let newItem;
-    let currentTotal = this.state.totalPrice;
+    let currentCartTotal = this.state.totalPrice;
 
     // Check if item already exists
-    for (let i = 0; i < currentItemList.length && itemExist === 0; i++) {
+    for (let i = 0; i < currentCartItems.length && itemExist === false; i++) {
       // If item exists, update the quantity and price
-      if (currentItemList[i].code === itemCode) {
-        currentItemList[i].quantity += itemQty;
-        currentItemList[i].totalPrice += parseFloat(itemPrice * itemQty);
-        currentTotal += parseFloat(itemPrice * itemQty);
+      if (currentCartItems[i].code === itemCode) {
+        currentCartItems[i].quantity += itemQty;
+        currentCartItems[i].totalPrice += parseFloat(itemPrice * itemQty);
+        currentCartTotal += parseFloat(itemPrice * itemQty);
 
         this.setState({
-          cartItems: currentItemList,
-          totalPrice: currentTotal
+          cartItems: currentCartItems,
+          totalPrice: currentCartTotal
         });
 
-        itemExist = 1;
+        itemExist = true;
       }
     }
     
     // If item does not exist, add it to the cart as a new item
-    if (itemExist !== 1) {
+    if (itemExist !== true) {
       newItem = {
         indexInInventory: itemIndexInInventory,
         code: itemCode,
@@ -54,41 +54,43 @@ class App extends Component {
         quantity: itemQty,
         totalPrice: parseFloat(itemPrice * itemQty)
       }
-      currentTotal = this.state.totalPrice + newItem.totalPrice;
+      currentCartTotal = this.state.totalPrice + newItem.totalPrice;
 
       this.setState({
         cartItems: [...this.state.cartItems, newItem],
-        totalPrice: currentTotal
+        totalPrice: currentCartTotal
       });
 
     }
   }
 
   handleRemoveFromCart(item) {
-    let currentInventoryItem = this.state.inventoryItems.slice(0);
+    let currentInventoryItems = this.state.inventoryItems.slice(0);
     let currentCartItems = this.state.cartItems.slice(0);
-    let currentTotal = this.state.totalPrice;
+    let currentCartTotal = this.state.totalPrice;
     let inventoryItemIndex;
+    let itemFound = false;
 
-    for (let i = 0; i < currentCartItems.length; i++) {
+    for (let i = 0; i < currentCartItems.length && itemFound === false; i++) {
       if (currentCartItems[i].code === item.code) {
         // Restore stock level in inventory
         inventoryItemIndex = currentCartItems[i].indexInInventory;
         this.handleUpdateInventoryItem(
           inventoryItemIndex, 
-          currentInventoryItem[inventoryItemIndex].stock, 
+          currentInventoryItems[inventoryItemIndex].stock, 
           currentCartItems[i].quantity, 
           true
         );
-        currentTotal -= currentCartItems[i].totalPrice;
-        currentCartItems.splice(i, 1);
+        currentCartTotal -= currentCartItems[i].totalPrice; // Decreases the total price in cart
+        currentCartItems.splice(i, 1); // Remove the item from cart
+        console.log(currentCartItems);
+        this.setState({
+          cartItems: currentCartItems,
+          totalPrice: currentCartTotal
+        });
+        itemFound = true;
       }
     }
-    
-    this.setState({
-      cartItems: currentCartItems,
-      totalPrice: currentTotal
-    });
 
   }
   

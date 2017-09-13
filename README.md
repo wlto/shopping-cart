@@ -30,17 +30,12 @@ This shopping cart concept is my attempt to learn the ReactJS library. This is a
 - [x] Implement the search functionality.
 - [x] Data validation for user's inputs.
 - [x] Calculation and displaying for total price.
-- [ ] Refactor code.
+- [x] Refactor code.
 - [ ] Styling with CSS.
-- [ ] Implement the check-out functionality.
 
 #### Observations
 
 - Since in JavaScript objects and arrays are assigned by reference, we must be more careful when mutating the values of objects and arrays.
-
-#### On-going process
-
-- 
 
 #### License
 
