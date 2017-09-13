@@ -21,7 +21,7 @@ This shopping cart concept is my attempt to learn the ReactJS library. This is a
 4. Type `npm install` to install the required dependencies.
 5. Type `npm start` to run. The app will show up under a local development server.
 
-> *Disclaimer: This application is just a concept. It is by no mean production-ready.*
+> *Disclaimer: This application is just a concept. It is by no mean production-ready. In other words, don't use this for your business.*
 
 #### To-dos
 
@@ -36,7 +36,11 @@ This shopping cart concept is my attempt to learn the ReactJS library. This is a
 
 #### Observations
 
-- We must be more careful when passing objects to a function. Since in JavaScript passing an object (or an array) to a function will pass the actual object (or array) itself. Hence, modifying that object inside the function results in mutating the object itself.
+- Since in JavaScript objects and arrays are assigned by reference, we must be more careful when mutating the values of objects and arrays.
+
+#### On-going process
+
+- 
 
 #### License
 

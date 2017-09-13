@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 
-import Search from './Search.js';
-import Inventory from './Inventory.js';
+import FilterableInventory from './FilterableInventory.js';
 import Cart from './Cart.js';
 
 class App extends Component {
@@ -9,44 +8,24 @@ class App extends Component {
     super(props);
     this.state = {
       inventoryItems: props.data,
-      filteredItems: [],
-      searchText: '',
       cartItems: [],
       totalPrice: 0
     };
   }
-  
-  handleSearchTextChange(text) {
-    // Returns items that have names matching the search text
-    const filteredList = this.state.inventoryItems.filter((item) => {
-      return item.name.toLowerCase().indexOf(text.toLowerCase().trim()) !== -1;
-    });
-    this.setState({
-      searchText: text,
-      filteredItems: filteredList
-    });
-  }
-  
-  handleAddToCart(itemStock, itemIndex, itemQty) {
-    const newStock = itemStock - itemQty;
-    const newItemList = this.state.inventoryItems;
-    newItemList[itemIndex].stock = newStock;
-    this.setState({
-      inventoryItems: newItemList
-    });
-    this.handleUpdateCartItems(
-      itemIndex, 
-      newItemList[itemIndex].code, 
-      newItemList[itemIndex].name, 
-      newItemList[itemIndex].price, 
-      itemQty
-    );
+
+  handleUpdateInventoryItem(itemIndex, itemStock, itemQty, removeFromCart) {
+    const itemList = this.state.inventoryItems.slice(0);
+    const currentItemStock = itemList[itemIndex].stock;
+    const newStock = removeFromCart ? currentItemStock + itemQty : currentItemStock - itemQty;
+    itemList[itemIndex].stock = newStock;
+
+    this.setState({ inventoryItems: itemList });
   }
 
   handleUpdateCartItems(itemIndexInInventory, itemCode, itemName, itemPrice, itemQty) {
-    const currentItemList = this.state.cartItems;
+    const currentItemList = this.state.cartItems.slice(0);
     let itemExist = 0;
-    let newItem = {};
+    let newItem;
     let currentTotal = this.state.totalPrice;
 
     // Check if item already exists
@@ -56,38 +35,51 @@ class App extends Component {
         currentItemList[i].quantity += itemQty;
         currentItemList[i].totalPrice += parseFloat(itemPrice * itemQty);
         currentTotal += parseFloat(itemPrice * itemQty);
+
         this.setState({
           cartItems: currentItemList,
           totalPrice: currentTotal
         });
+
         itemExist = 1;
       }
     }
     
     // If item does not exist, add it to the cart as a new item
     if (itemExist !== 1) {
-      newItem.indexInInventory = itemIndexInInventory;
-      newItem.code = itemCode;
-      newItem.name = itemName;
-      newItem.quantity = itemQty;
-      newItem.totalPrice = parseFloat(itemPrice * itemQty);
+      newItem = {
+        indexInInventory: itemIndexInInventory,
+        code: itemCode,
+        name: itemName,
+        quantity: itemQty,
+        totalPrice: parseFloat(itemPrice * itemQty)
+      }
       currentTotal = this.state.totalPrice + newItem.totalPrice;
+
       this.setState({
         cartItems: [...this.state.cartItems, newItem],
         totalPrice: currentTotal
       });
+
     }
   }
 
   handleRemoveFromCart(item) {
-    let currentInventoryItem = this.state.inventoryItems;
-    let currentCartItems = this.state.cartItems;
+    let currentInventoryItem = this.state.inventoryItems.slice(0);
+    let currentCartItems = this.state.cartItems.slice(0);
     let currentTotal = this.state.totalPrice;
+    let inventoryItemIndex;
 
     for (let i = 0; i < currentCartItems.length; i++) {
       if (currentCartItems[i].code === item.code) {
         // Restore stock level in inventory
-        currentInventoryItem[currentCartItems[i].indexInInventory].stock += currentCartItems[i].quantity;
+        inventoryItemIndex = currentCartItems[i].indexInInventory;
+        this.handleUpdateInventoryItem(
+          inventoryItemIndex, 
+          currentInventoryItem[inventoryItemIndex].stock, 
+          currentCartItems[i].quantity, 
+          true
+        );
         currentTotal -= currentCartItems[i].totalPrice;
         currentCartItems.splice(i, 1);
       }
@@ -97,25 +89,22 @@ class App extends Component {
       cartItems: currentCartItems,
       totalPrice: currentTotal
     });
+
   }
   
   render() {
     return (
       <div className="shopping-cart">
-        <Search
-          searchText={this.state.searchText} 
-          onSearchTextChange={this.handleSearchTextChange.bind(this)} />
-        <Inventory 
-          data={
-            this.state.searchText.length > 0 
-            ? this.state.filteredItems 
-            : this.state.inventoryItems
-          } 
-          onAddToCart={this.handleAddToCart.bind(this)} />
+        <FilterableInventory 
+          inventoryItems={this.state.inventoryItems} 
+          onUpdateCartItems={this.handleUpdateCartItems.bind(this)} 
+          onUpdateInventoryItem={this.handleUpdateInventoryItem.bind(this)}
+        />
         <Cart 
           cartItems={this.state.cartItems} 
           onRemoveFromCart={this.handleRemoveFromCart.bind(this)}
-          totalPrice={this.state.totalPrice} />
+          totalPrice={this.state.totalPrice} 
+        />
       </div>
     )
   }
