@@ -32,6 +32,13 @@ This shopping cart concept is my attempt to learn the ReactJS library. This is a
 - [x] Calculation and displaying for total price.
 - [x] Refactor code.
 - [ ] Styling with CSS.
+- [ ] Implement the check-out functionality (future).
+
+#### In-progress
+
+- Optimizing the application.
+- Code refactoring.
+- Maintaining/Updating dependencies.
 
 #### Observations
 
