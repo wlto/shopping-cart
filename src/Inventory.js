@@ -4,11 +4,11 @@ import InventoryItem from './InventoryItem.js';
 
 class Inventory extends Component {
   render() {
-    const inventoryItems = this.props.items.map((item, i) => {
+    const inventoryItems = this.props.items.map((item) => {
       return (
         <InventoryItem
           key={item.code} 
-          itemIndex={i} 
+          itemIndex={item.itemIndex} 
           item={item} 
           onAddToCart={this.props.onAddToCart}
         />

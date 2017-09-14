@@ -27,17 +27,19 @@ class FilterableInventory extends Component {
   }
   
   handleAddToCart(itemStock, itemIndex, itemQty) {
-    const newItemList = this.props.inventoryItems.slice(0);
+    if (!isNaN(itemQty)) {
+      const newItemList = this.props.inventoryItems.slice(0);
 
-    this.props.onUpdateInventoryItem(itemIndex, itemStock, itemQty, false);
+      this.props.onUpdateInventoryItem(itemIndex, itemStock, itemQty, false);
 
-    this.props.onUpdateCartItems(
-      itemIndex, 
-      newItemList[itemIndex].code, 
-      newItemList[itemIndex].name, 
-      newItemList[itemIndex].price, 
-      itemQty
-    );
+      this.props.onUpdateCartItems(
+        itemIndex, 
+        newItemList[itemIndex].code, 
+        newItemList[itemIndex].name, 
+        newItemList[itemIndex].price, 
+        itemQty
+      );
+    }
   }
 
   render() {

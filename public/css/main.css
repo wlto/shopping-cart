@@ -79,6 +79,11 @@
   text-align: left;
 }
 
+.inventory table td.inventory-item-to-cart button:disabled,
+.inventory table td.inventory-item-to-cart button:disabled:hover {
+  color: #95a5a6;
+}
+
 .inventory table td.inventory-item-to-cart button:hover,
 .cart table td.cart-item-remove-btn button:hover {
   color: #2ecc71;

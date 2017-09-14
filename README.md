@@ -31,8 +31,12 @@ This shopping cart concept is my attempt to learn the ReactJS library. This is a
 - [x] Data validation for user's inputs.
 - [x] Calculation and displaying for total price.
 - [x] Refactor code.
-- [ ] Styling with CSS.
+- [x] Styling with CSS.
 - [ ] Implement the check-out functionality (future).
+
+#### Issues
+
+- Inventory item's index passed by `map()` is mutated when searching. Temporary fix is to add the `itemIndex` property to the items in `data.js`.
 
 #### In-progress
 
