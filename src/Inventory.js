@@ -17,7 +17,6 @@ class Inventory extends Component {
 
     return (
       <div className="inventory">
-        <h2>Inventory</h2>
         <table>
           <thead>
             <tr>

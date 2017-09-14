@@ -9,7 +9,6 @@ class Cart extends Component {
     );
     return (
       <div className="cart">
-        <h2>Cart</h2>
         <table>
           <thead>
             <tr>
@@ -23,7 +22,7 @@ class Cart extends Component {
             {cartItems}
           </tbody>
         </table>
-        <h2>Total: <span>${this.props.totalPrice.toFixed(2)}</span></h2>
+        <h2 className="cart-total-price">Total: <span>${this.props.totalPrice.toFixed(2)}</span></h2>
       </div>
     )
   }

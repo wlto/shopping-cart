@@ -16,7 +16,7 @@ class InventoryItem extends Component {
         <td>{item.code}</td>
         <td>{item.stock}</td>
         <td><span>$</span>{item.price.toFixed(2)}</td>
-        <td>
+        <td className="inventory-item-qty">
           <input
             type="number"
             min={1}
@@ -25,7 +25,7 @@ class InventoryItem extends Component {
             onChange={(e) => this.setState({ itemQty: parseInt(e.target.value, 10) })}
           />
         </td>
-        <td>
+        <td className="inventory-item-to-cart">
           <button 
             disabled={item.stock < this.state.itemQty || item.stock === 0 || this.state.itemQty <= 0}
             onClick={
