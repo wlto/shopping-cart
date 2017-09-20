@@ -1,7 +1,9 @@
 # React Shopping Cart
 A minimal shopping cart concept built with ReactJS
 
-#### Why?
+## [DEMO](https://wlto.github.io/shopping-cart/)
+
+#### What is this?
 
 This shopping cart concept is my attempt to learn the ReactJS library. This is also an example of how data flows in React. Please check out the code for more information.
 
