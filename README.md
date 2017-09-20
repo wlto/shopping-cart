@@ -5,6 +5,10 @@ A minimal shopping cart concept built with ReactJS
 
 This shopping cart concept is my attempt to learn the ReactJS library. This is also an example of how data flows in React. Please check out the code for more information.
 
+#### Screenshot
+
+![React Shopping Cart Screenshot](https://github.com/wlto/shopping-cart/blob/master/public/img/screenshot.png)
+
 #### Technology
 
 - HTML & CSS.
