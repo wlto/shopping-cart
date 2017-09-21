@@ -13,7 +13,7 @@ class FilterableInventory extends Component {
     };
   }
 
-  handleSearchTextChange(text) {
+  handleSearchInput(text) {
     // Returns items that have names matching the search text
     const filteredList = this.props.inventoryItems.filter((item) => {
       return item.name.toLowerCase().indexOf(text.toLowerCase().trim()) !== -1;
@@ -25,18 +25,18 @@ class FilterableInventory extends Component {
     });
 
   }
-  
+
   handleAddToCart(itemStock, itemIndex, itemQty) {
     if (!isNaN(itemQty)) {
       const newItemList = this.props.inventoryItems.slice(0);
 
-      this.props.onUpdateInventoryItem(itemIndex, itemStock, itemQty, false);
+      this.props.onUpdateInventory(itemIndex, itemStock, itemQty, false);
 
       this.props.onUpdateCartItems(
-        itemIndex, 
-        newItemList[itemIndex].code, 
-        newItemList[itemIndex].name, 
-        newItemList[itemIndex].price, 
+        itemIndex,
+        newItemList[itemIndex].code,
+        newItemList[itemIndex].name,
+        newItemList[itemIndex].price,
         itemQty
       );
     }
@@ -46,16 +46,16 @@ class FilterableInventory extends Component {
     return (
       <div className="filterable-inventory">
         <Search
-          searchText={this.state.searchText} 
-          onSearchTextChange={this.handleSearchTextChange.bind(this)} 
+          searchText={this.state.searchText}
+          onSearchInput={this.handleSearchInput.bind(this)}
         />
-        <Inventory 
+        <Inventory
           items={
-            this.state.searchText.length > 0 
-            ? this.state.filteredItems 
+            this.state.searchText.length > 0
+            ? this.state.filteredItems
             : this.props.inventoryItems
-          } 
-          onAddToCart={this.handleAddToCart.bind(this)} 
+          }
+          onAddToCart={this.handleAddToCart.bind(this)}
         />
       </div>
     )

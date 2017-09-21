@@ -9,7 +9,7 @@ class Search extends Component {
           value={this.props.searchText}
           placeholder="Search"
           autoFocus={true}
-          onChange={(e) => this.props.onSearchTextChange(e.target.value)}
+          onChange={(e) => this.props.onSearchInput(e.target.value)}
         />
       </div>
     )

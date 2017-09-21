@@ -13,16 +13,16 @@ class App extends Component {
     };
   }
 
-  handleUpdateInventoryItem(itemIndex, itemStock, itemQty, removeFromCart) {
-    const itemList = this.state.inventoryItems.slice(0);
-    const currentInventoryStock = itemList[itemIndex].stock;
-    const newStock = removeFromCart ? currentInventoryStock + itemQty : currentInventoryStock - itemQty;
+  handleUpdateInventory(itemIndex, itemStock, itemQty, removeFromCart) {
+    const itemList = this.state.inventoryItems.slice(0); // Create a copy of the array and assign to itemList
+    const currentStock = itemList[itemIndex].stock;
+    const newStock = removeFromCart ? currentStock + itemQty : currentStock - itemQty;
     itemList[itemIndex].stock = newStock;
 
     this.setState({ inventoryItems: itemList });
   }
 
-  handleUpdateCartItems(itemIndexInInventory, itemCode, itemName, itemPrice, itemQty) {
+  handleUpdateCartItems(itemInventoryIndex, itemCode, itemName, itemPrice, itemQty) {
     const currentCartItems = this.state.cartItems.slice(0);
     let itemExist = false;
     let newItem;
@@ -44,11 +44,11 @@ class App extends Component {
         itemExist = true;
       }
     }
-    
+
     // If item does not exist, add it to the cart as a new item
-    if (itemExist !== true) {
+    if (itemExist === false) {
       newItem = {
-        indexInInventory: itemIndexInInventory,
+        inventoryIndex: itemInventoryIndex,
         code: itemCode,
         name: itemName,
         quantity: itemQty,
@@ -68,22 +68,22 @@ class App extends Component {
     let currentInventoryItems = this.state.inventoryItems.slice(0);
     let currentCartItems = this.state.cartItems.slice(0);
     let currentCartTotal = this.state.totalPrice;
-    let inventoryItemIndex;
+    let inventoryIndex;
     let itemFound = false;
 
     for (let i = 0; i < currentCartItems.length && itemFound === false; i++) {
       if (currentCartItems[i].code === item.code) {
         // Restore stock level in inventory
-        inventoryItemIndex = currentCartItems[i].indexInInventory;
-        this.handleUpdateInventoryItem(
-          inventoryItemIndex, 
-          currentInventoryItems[inventoryItemIndex].stock, 
-          currentCartItems[i].quantity, 
+        inventoryIndex = currentCartItems[i].inventoryIndex;
+        this.handleUpdateInventory(
+          inventoryIndex,
+          currentInventoryItems[inventoryIndex].stock,
+          currentCartItems[i].quantity,
           true
         );
         currentCartTotal -= currentCartItems[i].totalPrice; // Decreases the total price in cart
         currentCartItems.splice(i, 1); // Remove the item from cart
-        console.log(currentCartItems);
+        
         this.setState({
           cartItems: currentCartItems,
           totalPrice: currentCartTotal
@@ -93,19 +93,19 @@ class App extends Component {
     }
 
   }
-  
+
   render() {
     return (
       <div className="shopping-cart">
-        <FilterableInventory 
-          inventoryItems={this.state.inventoryItems} 
-          onUpdateCartItems={this.handleUpdateCartItems.bind(this)} 
-          onUpdateInventoryItem={this.handleUpdateInventoryItem.bind(this)}
+        <FilterableInventory
+          inventoryItems={this.state.inventoryItems}
+          onUpdateCartItems={this.handleUpdateCartItems.bind(this)}
+          onUpdateInventory={this.handleUpdateInventory.bind(this)}
         />
-        <Cart 
-          cartItems={this.state.cartItems} 
+        <Cart
+          cartItems={this.state.cartItems}
           onRemoveFromCart={this.handleRemoveFromCart.bind(this)}
-          totalPrice={this.state.totalPrice} 
+          totalPrice={this.state.totalPrice}
         />
       </div>
     )
