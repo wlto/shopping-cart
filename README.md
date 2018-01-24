@@ -37,4 +37,4 @@ This shopping cart concept is my attempt to learn the ReactJS library. This is a
 
 MIT License
 
-Copyright (c) 2017 William
+Copyright (c) 2018 William
