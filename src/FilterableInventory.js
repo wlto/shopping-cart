@@ -7,9 +7,8 @@ class FilterableInventory extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      inventoryItems: props.data,
       searchText: '',
-      filteredItems: []
+      filteredItems: this.props.inventoryItems
     };
   }
 
@@ -28,10 +27,13 @@ class FilterableInventory extends Component {
   
   handleAddToCart(itemStock, itemIndex, itemQty) {
     if (!isNaN(itemQty)) {
+      // copies inventory's items to a temporary array
       const newItemList = this.props.inventoryItems.slice(0);
 
+      // updates inventory
       this.props.onUpdateInventoryItem(itemIndex, itemStock, itemQty, false);
 
+      // updates cart
       this.props.onUpdateCartItems(
         itemIndex, 
         newItemList[itemIndex].code, 
@@ -50,11 +52,7 @@ class FilterableInventory extends Component {
           onSearchTextChange={this.handleSearchTextChange.bind(this)} 
         />
         <Inventory 
-          items={
-            this.state.searchText.length > 0 
-            ? this.state.filteredItems 
-            : this.props.inventoryItems
-          } 
+          items={this.state.filteredItems} 
           onAddToCart={this.handleAddToCart.bind(this)} 
         />
       </div>
