@@ -39,7 +39,7 @@ class InventoryItem extends Component {
           </button>
         </td>
       </tr>
-    )
+    );
   }
 }
 

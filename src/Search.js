@@ -1,19 +1,15 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-class Search extends Component {
-  render() {
-    return (
-      <div className="search-box">
-        <input 
-          type="text"
-          value={this.props.searchText}
-          placeholder="Search"
-          autoFocus={true}
-          onChange={(e) => this.props.onSearchTextChange(e.target.value)}
-        />
-      </div>
-    )
-  }
-}
+const Search = (props) => (
+  <div className="search-box">
+    <input 
+      type="text"
+      value={props.searchText}
+      placeholder="Search"
+      autoFocus={true}
+      onChange={(e) => props.onSearchTextChange(e.target.value)}
+    />
+  </div>
+);
 
 export default Search;

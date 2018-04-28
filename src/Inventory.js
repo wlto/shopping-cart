@@ -33,7 +33,7 @@ class Inventory extends Component {
           </tbody>
         </table>
       </div>
-    )
+    );
   }
 }
 

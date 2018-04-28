@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-
 import Search from './Search.js';
 import Inventory from './Inventory.js';
 
@@ -56,7 +55,7 @@ class FilterableInventory extends Component {
           onAddToCart={this.handleAddToCart.bind(this)} 
         />
       </div>
-    )
+    );
   }
 }
 

@@ -83,7 +83,7 @@ class App extends Component {
         );
         currentCartTotal -= currentCartItems[i].totalPrice; // Decreases the total price in cart
         currentCartItems.splice(i, 1); // Remove the item from cart
-        console.log(currentCartItems);
+        
         this.setState({
           cartItems: currentCartItems,
           totalPrice: currentCartTotal
@@ -108,7 +108,7 @@ class App extends Component {
           totalPrice={this.state.totalPrice} 
         />
       </div>
-    )
+    );
   }
 }
 
