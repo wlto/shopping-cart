@@ -56,11 +56,10 @@ class App extends Component {
       }
       currentCartTotal = this.state.totalPrice + newItem.totalPrice;
 
-      this.setState({
-        cartItems: [...this.state.cartItems, newItem],
+      this.setState((prevState, props) => ({
+        cartItems: [...prevState.cartItems, newItem],
         totalPrice: currentCartTotal
-      });
-
+      }));
     }
   }
 
@@ -97,6 +96,7 @@ class App extends Component {
   render() {
     return (
       <div className="shopping-cart">
+        <h1 className="shopping-cart__title">React Shopping Cart</h1>
         <FilterableInventory 
           inventoryItems={this.state.inventoryItems} 
           onUpdateCartItems={this.handleUpdateCartItems.bind(this)} 
