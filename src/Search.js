@@ -9,6 +9,10 @@ const Search = (props) => (
       autoFocus={true}
       onChange={(e) => props.onSearchTextChange(e.target.value)}
     />
+    {/* <select className="search-filter">
+      <option value="1" selected>Name</option>
+      <option value="1">Type</option>
+    </select> */}
   </div>
 );
 

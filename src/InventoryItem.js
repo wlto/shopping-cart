@@ -10,9 +10,11 @@ class InventoryItem extends Component {
   
   render() {
     const item = this.props.item;
+    
     return (
       <tr>
         <td>{item.name}</td>
+        <td>{item.type}</td>
         <td>{item.code}</td>
         <td>{item.stock}</td>
         <td><span>$</span>{item.price.toFixed(2)}</td>

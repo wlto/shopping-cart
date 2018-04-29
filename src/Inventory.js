@@ -21,6 +21,7 @@ class Inventory extends Component {
           <thead>
             <tr>
               <td>Name</td>
+              <td>Type</td>
               <td>Code</td>
               <td>Stock</td>
               <td>Price</td>

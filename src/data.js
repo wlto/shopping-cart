@@ -1,6 +1,7 @@
 const data = [
   {
     name: 'Orange Juice',
+    type: 'Beverage',
     code: 'OJ112',
     stock: 50,
     price: 4.99,
@@ -8,6 +9,7 @@ const data = [
   },
   {
     name: 'Potato Chips',
+    type: 'Snacks',
     code: 'PC231',
     stock: 100,
     price: 2.99,
@@ -15,6 +17,7 @@ const data = [
   },
   {
     name: 'Authentic Milk',
+    type: 'Dairy',
     code: 'AM410',
     stock: 15,
     price: 9.99,
@@ -22,6 +25,7 @@ const data = [
   },
   {
     name: 'Instant Tsukemen',
+    type: 'Food',
     code: 'IT065',
     stock: 20,
     price: 4.99,
@@ -29,6 +33,7 @@ const data = [
   },
   {
     name: 'Ichiban Sushi',
+    type: 'Food',
     code: 'IS332',
     stock: 20,
     price: 7.99,
@@ -36,6 +41,7 @@ const data = [
   },
   {
     name: 'Almond Milk',
+    type: 'Dairy',
     code: 'AM808',
     stock: 20,
     price: 3.99,
@@ -43,6 +49,7 @@ const data = [
   },
   {
     name: 'Philly Sushi',
+    type: 'Food',
     code: 'PS111',
     stock: 10,
     price: 2.99,
@@ -50,6 +57,7 @@ const data = [
   },
   {
     name: 'Apple Juice',
+    type: 'Beverage',
     code: 'AJ696',
     stock: 5,
     price: 1.99,
