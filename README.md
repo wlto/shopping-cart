@@ -5,7 +5,7 @@ A minimal shopping cart concept built with ReactJS
 
 #### What is this?
 
-This shopping cart concept is my attempt to learn the ReactJS library. This is also an example of how data flows in React. Please check out the code for more information.
+This shopping cart concept is my attempt to learn the ReactJS library. This is also an example of how data flows in React (unidirectional). Please check out the code for more information.
 
 #### Screenshot
 
@@ -27,8 +27,6 @@ This shopping cart concept is my attempt to learn the ReactJS library. This is a
 4. Type `npm install` to install the required dependencies.
 5. Type `npm start` to run. The app will show up under a local development server.
 
-> *Disclaimer: This application is just a concept. It is by no mean production-ready. In other words, don't use this for your business.*
-
 #### Observations
 
 - Since in JavaScript objects and arrays are assigned by reference, we must be more careful when mutating the values of objects and arrays.
@@ -37,4 +35,4 @@ This shopping cart concept is my attempt to learn the ReactJS library. This is a
 
 MIT License
 
-Copyright (c) 2018 William
+Copyright (c) 2019 William
