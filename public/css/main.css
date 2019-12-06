@@ -121,8 +121,38 @@
   opacity: 1;
 }
 
+.cart-footer {
+  padding-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
 .cart-total-price {
-  margin-top: 25px;
   font-family: 'Helvetica Neue', 'Segoe UI', sans-serif;
   color: #34495e;
+}
+
+.cart-receipt-btn {
+  display: inline-block;
+  box-shadow: 0px 0px 4px 0px #d2d2d2;
+  border: none;
+  color: #34495e;
+  font-family: 'Helvetica Neue', 'Segoe UI', sans-serif;
+  padding: 15px 32px;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+}
+
+.cart-receipt-btn:hover {
+  box-shadow: 0px 0px 8px 2px #d2d2d2;
+}
+
+.shopping-cart-goback {
+  color: #34495e;
+  font-family: 'Helvetica Neue', 'Segoe UI', sans-serif;
 }

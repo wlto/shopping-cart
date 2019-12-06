@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-
-import FilterableInventory from './FilterableInventory.js';
-import Cart from './Cart.js';
+import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom'
+import Home from './Home.js'
+import Checkout from './Checkout.js'
 
 class App extends Component {
   constructor(props) {
@@ -57,7 +57,7 @@ class App extends Component {
       currentCartTotal = this.state.totalPrice + newItem.totalPrice;
 
       this.setState((prevState, props) => ({
-        cartItems: [...prevState.cartItems, newItem],
+        cartItems:[...prevState.cartItems,newItem],
         totalPrice: currentCartTotal
       }));
     }
@@ -90,24 +90,28 @@ class App extends Component {
         itemFound = true;
       }
     }
-
   }
-  
+
   render() {
     return (
-      <div className="shopping-cart">
-        <h1 className="shopping-cart__title">React Shopping Cart</h1>
-        <FilterableInventory 
-          inventoryItems={this.state.inventoryItems} 
-          onUpdateCartItems={this.handleUpdateCartItems.bind(this)} 
-          onUpdateInventoryItem={this.handleUpdateInventoryItem.bind(this)}
-        />
-        <Cart 
-          cartItems={this.state.cartItems} 
-          onRemoveFromCart={this.handleRemoveFromCart.bind(this)}
-          totalPrice={this.state.totalPrice} 
-        />
-      </div>
+      <Switch>
+        <Route exact path='/' render={() => (
+          <Home
+            onUpdateInventoryItem={this.handleUpdateInventoryItem.bind(this)}
+            onUpdateCartItems={this.handleUpdateCartItems.bind(this)}
+            onRemoveFromCart={this.handleRemoveFromCart.bind(this)}
+            inventoryItems={this.state.inventoryItems}
+            cartItems={this.state.cartItems}
+            totalPrice={this.state.totalPrice}
+          />
+        )} />
+        <Route exact path='/checkout' render={() => (
+          <Checkout
+            cartItems={this.state.cartItems}
+            totalPrice={this.state.totalPrice}
+          />
+        )} />
+      </Switch>
     );
   }
 }
